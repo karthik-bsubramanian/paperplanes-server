@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+//This is not json this is HCL(Hashicorp configuration language) used in prisma like tools.
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String  @id @default(uuid())
+  email    String  @unique
+  name     String?
+  password String
+  posts    post[]
+}
+
+model post {
+  id        String  @id @default(uuid())
+  title     String
+  content   String
+  published Boolean @default(false)
+  authorId  String
+  author    User    @relation(fields: [authorId], references: [id])
+}
