@@ -124,15 +124,38 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   name: 'name',
-  password: 'password'
+  image: 'image',
+  googleId: 'googleId'
 };
 
 exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
   title: 'title',
   content: 'content',
+  createdAt: 'createdAt',
+  likes: 'likes',
   published: 'published',
+  updatedAt: 'updatedAt',
+  topicId: 'topicId',
   authorId: 'authorId'
+};
+
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  createdAt: 'createdAt',
+  postId: 'postId',
+  authorId: 'authorId'
+};
+
+exports.Prisma.TopicScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.UserSavedPostScalarFieldEnum = {
+  userId: 'userId',
+  postId: 'postId'
 };
 
 exports.Prisma.SortOrder = {
@@ -153,7 +176,10 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  post: 'post'
+  Post: 'Post',
+  Comment: 'Comment',
+  Topic: 'Topic',
+  UserSavedPost: 'UserSavedPost'
 };
 
 /**

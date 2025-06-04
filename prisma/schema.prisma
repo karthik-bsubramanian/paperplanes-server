@@ -6,21 +6,66 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  relationMode = "foreignKeys"
 }
 
 model User{
   id       String @id @default(uuid())
   email    String @unique
   name     String?
-  password String
-  posts    post[]
+  image    String?
+  googleId String? @unique
+
+  posts    Post[]
+  comments Comment[]
+
+  savedPosts  UserSavedPost[]
 }
 
-model post{
+model Post{
   id        String @id @default(uuid())
   title     String
   content   String
+  createdAt DateTime @default(now())
+  likes     Int @default(0)
   published Boolean @default(false)
+  updatedAt DateTime @updatedAt
+  comments  Comment[]
+
+  topic     Topic @relation(fields: [topicId],references: [id])
+  topicId   Int
+
+  author    User @relation(fields: [authorId],references: [id], onDelete: Cascade)
+  authorId  String 
+
+  savedBy  UserSavedPost[]
+
+}
+
+model Comment{
+  id        Int @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+
+  post      Post @relation(fields: [postId],references: [id],onDelete: Cascade)
+  postId    String
+
+  author    User @relation(fields: [authorId],references: [id],onDelete: Cascade)
   authorId  String
-  author    User @relation(fields: [authorId],references: [id])
+}
+
+model Topic{
+  id      Int @id @default(autoincrement())
+  name    String @unique
+  posts   Post[]
+}
+
+model UserSavedPost{
+  userId    String
+  postId    String
+
+  user      User @relation(fields: [userId],references: [id],onDelete: Cascade)
+  post      Post @relation(fields: [postId],references: [id],onDelete: Cascade)
+
+  @@id([userId,postId])
 }
