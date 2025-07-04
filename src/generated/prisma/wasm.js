@@ -128,6 +128,13 @@ exports.Prisma.UserScalarFieldEnum = {
   googleId: 'googleId'
 };
 
+exports.Prisma.FollowScalarFieldEnum = {
+  id: 'id',
+  followerId: 'followerId',
+  followingId: 'followingId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -176,6 +183,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Follow: 'Follow',
   Post: 'Post',
   Comment: 'Comment',
   Topic: 'Topic',

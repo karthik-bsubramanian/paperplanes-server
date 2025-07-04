@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
-import user from './routes/user';
-import blog from './routes/blog';
+import user from './routes/UserIndex';
+import blog from './routes/BlogIndex';
 import { cors } from 'hono/cors';
 
 const app = new Hono().basePath("api/v1");
